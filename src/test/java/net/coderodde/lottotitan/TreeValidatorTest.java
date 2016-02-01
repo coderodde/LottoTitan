@@ -24,31 +24,41 @@ public class TreeValidatorTest {
         pair4.addNeighborNumberPair(pair1);
         
         candidate.clear();
-        candidate.addAll(Arrays.asList(pair1, pair2, pair4, pair3));
+        candidate.addAll(Arrays.asList(pair1, pair2, pair3, pair4));
         
         validator = new TreeValidator(4);
         assertFalse(validator.isValidTree(candidate));
         
         pair1 = new NumberPair(1, 2);
         pair2 = new NumberPair(1, 3);
-        pair3 = new NumberPair(4, 1);
+        pair3 = new NumberPair(1, 4);
         pair4 = new NumberPair(4, 5);
         
         candidate.clear();
         candidate.addAll(Arrays.asList(pair1, pair2, pair3, pair4));
         
-        assertTrue(validator.isValidTree(candidate));
+        assertFalse(validator.isValidTree(candidate));
         
-        NumberPair pair5 = new NumberPair(5, 3);
-        
-        candidate.add(pair5);
-        
-        assertTrue(validator.isValidTree(candidate));
-        
-        NumberPair pair6 = new NumberPair(4, 3);
-        
-        candidate.add(pair6);
+        pair1.addNeighborNumberPair(pair2);
+        pair1.addNeighborNumberPair(pair3);
+        pair2.addNeighborNumberPair(pair3);
+        pair3.addNeighborNumberPair(pair4);
         
         assertTrue(validator.isValidTree(candidate));
+        
+        // Cycle and disconnected.
+        pair1 = new NumberPair(1, 2);
+        pair2 = new NumberPair(2, 3);
+        pair3 = new NumberPair(3, 1);
+        pair4 = new NumberPair(4, 5);
+        
+        pair1.addNeighborNumberPair(pair2);
+        pair2.addNeighborNumberPair(pair3);
+        pair3.addNeighborNumberPair(pair1);
+        
+        candidate.clear();
+        candidate.addAll(Arrays.asList(pair1, pair2, pair3, pair4));
+        
+        assertFalse(validator.isValidTree(candidate));
     }
 }

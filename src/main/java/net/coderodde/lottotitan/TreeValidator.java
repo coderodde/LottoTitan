@@ -49,7 +49,8 @@ public class TreeValidator {
         filterSet.clear();
         filterSet.addAll(candidate);
         
-        return isAcyclicImpl(candidate.get(0));
+        return isAcyclicImpl(candidate.get(0)) 
+                && visitedSet.size() == candidate.size();
     }
     
     private boolean isAcyclicImpl(NumberPair pair) {

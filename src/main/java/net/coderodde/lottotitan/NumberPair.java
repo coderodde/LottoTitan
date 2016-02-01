@@ -81,9 +81,9 @@ class NumberPair {
         return numberA == other.numberA && numberB == other.numberB;
     }
     
-    public static void main(String[] args) {
-        benchmark();
-    }
+//    public static void main(String[] args) {
+//        benchmark();
+//    }
     
     public static void benchmark() {
         int numbers = 39;
